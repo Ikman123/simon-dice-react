@@ -1,0 +1,31 @@
+.grilla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    width: 650px;
+    height: 600px;
+}
+
+.red {
+    background-color: red;
+    color: white;
+    border-top-left-radius: 100%;
+}
+
+.blue {
+    background-color: blue;
+    color: white;
+    border-top-right-radius: 100%;
+}
+
+.green {
+    background-color: green;
+    color: white;
+    border-bottom-left-radius: 100%;
+}
+
+.yellow {
+    background-color: yellow;
+    color: black;
+    border-end-end-radius: 100%;
+}

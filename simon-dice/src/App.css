@@ -1,0 +1,9 @@
+.App {
+  text-align: center;
+}
+
+.centrar{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
