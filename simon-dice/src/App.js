@@ -1,13 +1,15 @@
 import './App.css';
 import Botones from './components/botones';
 import Inicio from './components/inicio';
+import Puntaje from './components/puntaje';
 
 function App() {
   return (
     <>
-      <Inicio />
       <div className='centrar'>
+        <Inicio />
         <Botones />
+        <Puntaje />
       </div>
       
     </>

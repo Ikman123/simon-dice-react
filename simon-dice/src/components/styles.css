@@ -2,8 +2,38 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    width: 650px;
-    height: 600px;
+    width: 450px;
+    height: 400px;
+}
+
+.cont-nombre{
+    display: flex;
+    margin: 10px;
+    align-items: center;
+    height: 50px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color:rgb(34, 29, 192);
+    border: 5px solid #000000; 
+    color: white;
+}
+
+.cont-nombre input{
+    margin-left:15px ;
+}
+
+.iniciar{
+    color: white;
+    background-color: rgb(58, 42, 165);
+    height: 50px;
+    margin: 15px;
+    border-radius: 10px;
+    transition-duration: 0.4s;
+}
+
+.iniciar:hover {
+    background-color: #4CAF50;
+    color: white;
 }
 
 .red {
@@ -28,4 +58,13 @@
     background-color: yellow;
     color: black;
     border-end-end-radius: 100%;
+}
+
+.contenedor-puntaje{
+    margin-top: 15px;
+    background-color: rgb(34, 29, 192);
+    border: 5px solid #000000; 
+    border-radius: 15px;
+    color:white ;
+    padding: 10px;
 }

@@ -1,3 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("../public/stacked-waves-haikei.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .App {
   text-align: center;
 }
