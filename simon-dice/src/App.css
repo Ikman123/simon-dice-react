@@ -12,5 +12,6 @@ body {
 .centrar{
   display: flex;
   align-items: center;
-  flex-direction: column;
+  margin: 50px;
+  justify-content:space-between;
 }
