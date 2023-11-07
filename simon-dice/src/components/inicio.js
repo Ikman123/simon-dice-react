@@ -1,35 +1,29 @@
-import './styles.css';
 import React, { useState } from 'react';
 
-function Inicio() {
-    const [name, setName] = useState('');
-    const [savedName, setSavedName] = useState('');
+function RegistroNombre({ onRegister }) {
+    const [nombre, setNombre] = useState('');
 
-    const handleNameChange = (event) => {
-        setName(event.target.value);
+    const handleNombreChange = (e) => {
+        setNombre(e.target.value);
     };
 
-    const handleGuardarClick = () => {
-        setSavedName(name);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onRegister(nombre);
     };
 
     return (
-        <>
-            <div className='cont-nombre'>
-                <form>
-                    <label>Ingresa tu nombre:</label>
-                    <input
-                        type="text"
-                        value={name}
-                        onChange={handleNameChange}
-                    />
-                    <button onClick={handleGuardarClick}>Guardar</button>
-                </form>
-            </div>
-            <button className='iniciar'>INICIAR JUEGO</button>
-            {savedName && <p>Tu nombre guardado: {savedName}</p>}
-        </>
+        <div>
+        <h2>Registrar Nombre</h2>
+        <form onSubmit={handleSubmit}>
+            <label>
+            Nombre:
+            <input type="text" value={nombre} onChange={handleNombreChange} />
+            </label>
+            <button type="submit">Registrar</button>
+        </form>
+        </div>
     );
 }
 
-export default Inicio;
+export default RegistroNombre;

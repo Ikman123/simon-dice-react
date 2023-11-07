@@ -1,17 +1,12 @@
-import './styles.css';
-import React, {useState } from 'react';
+import React from 'react';
 
-function    Puntaje() {
-    const [puntaje, setPuntaje] = useState();
+function Puntaje({ jugadores }) {
+    
     return (
     <>
-        <div className='contenedor-puntaje'>
-            <h3>Este es tu puntaje:</h3>
-            <br></br>
-            <h3>Los mejores puntajes son:</h3>
-        </div>
     </>
     );
 }
 
 export default Puntaje;
+
