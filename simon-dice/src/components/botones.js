@@ -1,73 +1,66 @@
 import React, { useState, useEffect } from 'react';
 import './styles.css';
-import RegistroNombre from './inicio'; // Importa el nuevo componente
+import RegistroNombre from './inicio';
 
 function JuegoSecuencia() {
-  const [secuencia, setSecuencia] = useState([]);
-  const [intento, setIntento] = useState(0);
-  const [colorBoton, setColorBoton] = useState(null);
-  const [nombre, setNombre] = useState('');
-  const [aciertos, setAciertos] = useState(0); // Nuevo estado para aciertos
+  const [seq, setSeq] = useState([]);
+  const [intent, setIntent] = useState(0);
+  const [btnColor, setBtnColor] = useState(null);
+  const [name, setName] = useState('');
 
-  const generarNumeroAleatorio = () => {
-    return Math.floor(Math.random() * 4) + 1;
+  const getRandomNumber = () => Math.floor(Math.random() * 4) + 1;
+
+  const startGame = () => {
+    const newNum = getRandomNumber();
+    setSeq(prevSeq => [...prevSeq, newNum]);
+    setIntent(0);
+    showRandomNumber(newNum);
+    console.log(seq);
   };
 
-  const iniciarJuego = () => {
-    const nuevoNumero = generarNumeroAleatorio();
-    setSecuencia((prevSecuencia) => [...prevSecuencia, nuevoNumero]);
-    setIntento(0);
-    mostrarNumeroAleatorio(nuevoNumero);
+  const showRandomNumber = (num) => {
+    setBtnColor(null);
+    setBtnColor(num);
+    setTimeout(() => setBtnColor(null), 2000);
   };
 
-  const reiniciarJuego = () => {
-    setSecuencia([]);
-    iniciarJuego();
-  };
-
-  const mostrarNumeroAleatorio = (numero) => {
-    setColorBoton(null);
-    setTimeout(() => {
-      setColorBoton(numero);
-      setTimeout(() => {
-        setColorBoton(null);
-      }, 2000);
-    }, 0);
-  };
-
-  const presionarBoton = (numero) => {
-    if (numero === secuencia[intento]) {
-      if (intento === secuencia.length - 1) {
-        iniciarJuego();
-        setAciertos(aciertos + 1); // Incrementa los aciertos
+  const pressButton = (num) => {
+    if (num === seq[intent]) {
+      if (intent === seq.length - 1) {
+        startGame();
       } else {
-        setIntento(intento + 1);
+        setIntent(intent + 1);
       }
     } else {
-      reiniciarJuego();
+      alert("¡Perdiste!");
+      resetGame();
     }
   };
 
-  const handleRegistroNombre = (nuevoNombre) => {
-    setNombre(nuevoNombre);
-  };
+  const handleRegisterName = (newName) => setName(newName);
+
+  const resetGame = () => setSeq([]);
 
   useEffect(() => {
-    iniciarJuego();
-  }, []);
+    if (seq.length === 0) {
+      startGame();
+    }
+  }, [seq]);
+
+  const getBtnStyle = (buttonNumber) => ` ${btnColor === buttonNumber ? 'bright' : ''}`;
 
   return (
     <>
-      <RegistroNombre onRegister={handleRegistroNombre} />
-      <h3>Nombre: {nombre}</h3>
-      <h3>Aciertos: {aciertos}</h3>
+      <button onClick={() => console.log(seq)}>PROBA</button>
+      <RegistroNombre onRegister={handleRegisterName} />
+      <h3>Nombre: {name}</h3>
       <div className="grilla">
-        <button className={`red ${colorBoton === 1 ? 'bright' : ''}`} onClick={() => presionarBoton(1)}></button>
-        <button className={`blue ${colorBoton === 2 ? 'bright' : ''}`} onClick={() => presionarBoton(2)}></button>
-        <button className={`green ${colorBoton === 3 ? 'bright' : ''}`} onClick={() => presionarBoton(3)}></button>
-        <button className={`yellow ${colorBoton === 4 ? 'bright' : ''}`} onClick={() => presionarBoton(4)}></button>
+        <button className={`red${getBtnStyle(1)}`} onClick={() => pressButton(1)}></button>
+        <button className={`blue${getBtnStyle(2)}`} onClick={() => pressButton(2)}></button>
+        <button className={`green${getBtnStyle(3)}`} onClick={() => pressButton(3)}></button>
+        <button className={`yellow${getBtnStyle(4)}`} onClick={() => pressButton(4)}></button>
       </div>
-      <button onClick={() => reiniciarJuego()}>Reiniciar</button>
+      <button onClick={resetGame}>Reiniciar</button>
     </>
   );
 }
