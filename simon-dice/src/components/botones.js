@@ -12,17 +12,23 @@ function JuegoSecuencia() {
 
   const startGame = () => {
     const newNum = getRandomNumber();
-    setSeq(prevSeq => [...prevSeq, newNum]);
+    console.log("fum")
+    setSeq([...seq, newNum]);
     setIntent(0);
-    showRandomNumber(newNum);
-    console.log(seq);
+    
   };
 
-  const showRandomNumber = (num) => {
-    setBtnColor(null);
-    setBtnColor(num);
-    setTimeout(() => setBtnColor(null), 2000);
+  const showRandomNumber = (index = 0) => {
+    if (index < seq.length) {
+      setBtnColor(null);
+      setBtnColor(seq[index]);
+      setTimeout(() => {
+        setBtnColor(null);
+        showRandomNumber(index + 1);
+      }, 1000);
+    }
   };
+  
 
   const pressButton = (num) => {
     if (num === seq[intent]) {
@@ -44,6 +50,9 @@ function JuegoSecuencia() {
   useEffect(() => {
     if (seq.length === 0) {
       startGame();
+    } else{
+      showRandomNumber();
+      console.log(seq);
     }
   }, [seq]);
 
@@ -51,14 +60,13 @@ function JuegoSecuencia() {
 
   return (
     <>
-      <button onClick={() => console.log(seq)}>PROBA</button>
       <RegistroNombre onRegister={handleRegisterName} />
       <h3>Nombre: {name}</h3>
       <div className="grilla">
-        <button className={`red${getBtnStyle(1)}`} onClick={() => pressButton(1)}></button>
-        <button className={`blue${getBtnStyle(2)}`} onClick={() => pressButton(2)}></button>
-        <button className={`green${getBtnStyle(3)}`} onClick={() => pressButton(3)}></button>
-        <button className={`yellow${getBtnStyle(4)}`} onClick={() => pressButton(4)}></button>
+        <button className={`red ${getBtnStyle(1)}`} onClick={() => pressButton(1)}></button>
+        <button className={`blue ${getBtnStyle(2)}`} onClick={() => pressButton(2)}></button>
+        <button className={`green ${getBtnStyle(3)}`} onClick={() => pressButton(3)}></button>
+        <button className={`yellow ${getBtnStyle(4)}`} onClick={() => pressButton(4)}></button>
       </div>
       <button onClick={resetGame}>Reiniciar</button>
     </>
